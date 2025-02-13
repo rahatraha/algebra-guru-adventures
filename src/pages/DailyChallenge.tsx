@@ -1,5 +1,6 @@
 
 import { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import Navbar from "../components/layout/Navbar";
 import { CheckCircle2, XCircle } from "lucide-react";
 import { useToast } from "@/components/ui/use-toast";
@@ -18,6 +19,11 @@ const DailyChallenge = () => {
   const [answered, setAnswered] = useState(false);
   const [selectedAnswer, setSelectedAnswer] = useState<string>("");
   const { toast } = useToast();
+  const navigate = useNavigate();
+
+  // Создаем аудио элементы для звуковых эффектов
+  const correctSound = new Audio("/correct.mp3");
+  const incorrectSound = new Audio("/wrong.mp3");
 
   useEffect(() => {
     // В реальном приложении это будет API запрос
@@ -43,25 +49,32 @@ const DailyChallenge = () => {
     setCurrentQuestion(randomQuestion);
   }, []);
 
-  const handleAnswer = (answer: string) => {
+  const handleAnswer = async (answer: string) => {
     if (answered) return;
     
     setSelectedAnswer(answer);
     setAnswered(true);
     
     if (currentQuestion && answer === currentQuestion.correctAnswer) {
+      correctSound.play();
       toast({
         title: "Правильно!",
         description: "+50 XP",
         className: "bg-edu-success text-white"
       });
     } else {
+      incorrectSound.play();
       toast({
         title: "Неправильно!",
         description: "Попробуйте завтра снова",
         className: "bg-edu-error text-white"
       });
     }
+
+    // Ждем 2 секунды перед перенаправлением, чтобы пользователь увидел результат
+    setTimeout(() => {
+      navigate('/');
+    }, 2000);
   };
 
   if (!currentQuestion) return <div>Загрузка...</div>;
