@@ -10,6 +10,7 @@ import DailyChallenge from "./pages/DailyChallenge";
 import SubjectGrade from "./pages/SubjectGrade";
 import TopicDetails from "./pages/TopicDetails";
 import Calculator from "./pages/Calculator";
+import Achievements from "./pages/Achievements";
 
 const queryClient = new QueryClient();
 
@@ -25,7 +26,7 @@ const App = () => (
           <Route path="/:subject" element={<SubjectGrade />} />
           <Route path="/:subject/:grade/:topicId" element={<TopicDetails />} />
           <Route path="/calculator" element={<Calculator />} />
-          <Route path="/achievements" element={<NotFound />} />
+          <Route path="/achievements" element={<Achievements />} />
           <Route path="/forum" element={<NotFound />} />
           <Route path="*" element={<NotFound />} />
         </Routes>

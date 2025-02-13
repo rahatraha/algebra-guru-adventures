@@ -30,12 +30,35 @@ const Calculator = () => {
   };
 
   const operationClick = (op: string) => {
-    setMemory(parseFloat(display));
+    const currentValue = parseFloat(display);
+    if (op === "^2") {
+      setDisplay((currentValue * currentValue).toString());
+      setNewNumber(true);
+      return;
+    }
+    if (op === "√") {
+      setDisplay(Math.sqrt(currentValue).toString());
+      setNewNumber(true);
+      return;
+    }
+    if (op === "log") {
+      setDisplay(Math.log10(currentValue).toString());
+      setNewNumber(true);
+      return;
+    }
+    if (op === "ln") {
+      setDisplay(Math.log(currentValue).toString());
+      setNewNumber(true);
+      return;
+    }
+    setMemory(currentValue);
     setOperation(op);
     setNewNumber(true);
   };
 
   const calculateResult = () => {
+    if (!operation) return;
+    
     const current = parseFloat(display);
     let result = 0;
 
@@ -51,18 +74,6 @@ const Calculator = () => {
         break;
       case "/":
         result = memory / current;
-        break;
-      case "^2":
-        result = Math.pow(memory, 2);
-        break;
-      case "√":
-        result = Math.sqrt(memory);
-        break;
-      case "log":
-        result = Math.log10(memory);
-        break;
-      case "ln":
-        result = Math.log(memory);
         break;
       default:
         result = current;
