@@ -6,8 +6,9 @@ import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Index from "./pages/Index";
 import NotFound from "./pages/NotFound";
+import DailyChallenge from "./pages/DailyChallenge";
+import SubjectGrade from "./pages/SubjectGrade";
 
-// Initialize QueryClient
 const queryClient = new QueryClient();
 
 const App = () => (
@@ -18,8 +19,8 @@ const App = () => (
       <BrowserRouter>
         <Routes>
           <Route path="/" element={<Index />} />
-          <Route path="/algebra" element={<NotFound />} />
-          <Route path="/russian" element={<NotFound />} />
+          <Route path="/daily-challenge" element={<DailyChallenge />} />
+          <Route path="/:subject" element={<SubjectGrade />} />
           <Route path="/calculator" element={<NotFound />} />
           <Route path="/achievements" element={<NotFound />} />
           <Route path="/forum" element={<NotFound />} />

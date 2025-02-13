@@ -97,9 +97,12 @@ const Index = () => {
             <p className="text-lg text-gray-700">
               Решите задание и получите дополнительные XP!
             </p>
-            <button className="w-full bg-edu-primary text-white rounded-lg py-3 px-6 font-medium hover:bg-edu-secondary transition-colors duration-200">
+            <Link
+              to="/daily-challenge"
+              className="block w-full bg-edu-primary text-white rounded-lg py-3 px-6 font-medium hover:bg-edu-secondary transition-colors duration-200 text-center"
+            >
               Начать вызов
-            </button>
+            </Link>
           </div>
         </div>
       </main>
