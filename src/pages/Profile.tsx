@@ -1,4 +1,3 @@
-
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import Navbar from "../components/layout/Navbar";
@@ -18,10 +17,13 @@ import {
   Volume2,
   BellRing,
   Upload,
-  Pencil
+  Pencil,
+  BookOpen,
+  Rocket,
+  Target
 } from "lucide-react";
 import { useToast } from "@/components/ui/use-toast";
-import type { UserProfile, SubjectProgress, Achievement } from "@/types/profile";
+import type { UserProfile, SubjectProgress, Achievement, UserSettings } from "@/types/profile";
 
 const mockProfile: UserProfile = {
   id: "1",
@@ -109,19 +111,18 @@ const Profile = () => {
       <Navbar />
       <main className="container mx-auto px-4 py-8">
         <div className="grid gap-6 md:grid-cols-12">
-          {/* Левая колонка - основная информация */}
           <div className="md:col-span-4 space-y-6">
-            <Card className="p-6">
-              <div className="relative">
-                <Avatar className="w-32 h-32 mx-auto">
-                  <AvatarImage src={profile.avatar} />
-                  <AvatarFallback>
+            <Card className="p-6 hover:shadow-lg transition-shadow">
+              <div className="relative group">
+                <Avatar className="w-32 h-32 mx-auto ring-2 ring-primary/20 group-hover:ring-primary transition-all">
+                  <AvatarImage src={profile.avatar} className="object-cover" />
+                  <AvatarFallback className="bg-primary/5">
                     {profile.firstName[0]}{profile.lastName[0]}
                   </AvatarFallback>
                 </Avatar>
                 <label 
                   htmlFor="avatar-upload" 
-                  className="absolute bottom-0 right-1/3 bg-primary hover:bg-primary/90 text-white p-2 rounded-full cursor-pointer"
+                  className="absolute bottom-0 right-1/3 bg-primary hover:bg-primary/90 text-white p-2 rounded-full cursor-pointer transform hover:scale-110 transition-transform"
                 >
                   <Upload className="h-4 w-4" />
                 </label>
@@ -134,35 +135,76 @@ const Profile = () => {
                 />
               </div>
 
-              <div className="mt-4 text-center">
-                <h2 className="text-2xl font-bold">
+              <div className="mt-4 text-center space-y-2">
+                <h2 className="text-2xl font-bold hover:text-primary transition-colors">
                   {profile.firstName} {profile.lastName}
                 </h2>
-                <p className="text-muted-foreground">{profile.grade} класс</p>
+                <p className="text-muted-foreground flex items-center justify-center gap-2">
+                  <BookOpen className="h-4 w-4" />
+                  {profile.grade} класс
+                </p>
               </div>
 
-              <div className="mt-6">
+              <div className="mt-6 space-y-2">
                 <div className="flex items-center justify-between mb-2">
-                  <span className="text-sm font-medium">Уровень {profile.level}</span>
+                  <span className="text-sm font-medium flex items-center gap-2">
+                    <Rocket className="h-4 w-4" />
+                    Уровень {profile.level}
+                  </span>
                   <span className="text-sm text-muted-foreground">{profile.xp} XP</span>
                 </div>
-                <Progress value={calculateLevelProgress()} className="h-2" />
+                <Progress 
+                  value={calculateLevelProgress()} 
+                  className="h-2 bg-primary/10"
+                />
+                <p className="text-xs text-muted-foreground text-center">
+                  До следующего уровня: {(profile.level + 1) * 1000 - profile.xp} XP
+                </p>
               </div>
 
               <div className="mt-6 flex items-center justify-center gap-4">
-                <Badge variant="secondary" className="flex gap-1">
+                <Badge 
+                  variant="secondary" 
+                  className="flex gap-1 hover:bg-primary/10 transition-colors cursor-pointer"
+                  onClick={() => navigate('/achievements')}
+                >
                   <Trophy className="h-4 w-4" />
                   {profile.achievements.filter(a => a.earned).length} достижений
                 </Badge>
-                <Badge variant="secondary" className="flex gap-1">
+                <Badge 
+                  variant="secondary" 
+                  className="flex gap-1 hover:bg-primary/10 transition-colors cursor-pointer"
+                >
                   <Star className="h-4 w-4" />
                   {profile.streakDays} дней подряд
                 </Badge>
               </div>
             </Card>
 
-            {/* Настройки */}
-            <Card className="p-6">
+            <Card className="p-6 hover:shadow-lg transition-shadow">
+              <h3 className="text-lg font-semibold mb-4 flex items-center gap-2">
+                <Target className="h-5 w-5 text-primary" />
+                Ежедневные цели
+              </h3>
+              <div className="space-y-4">
+                <div>
+                  <div className="flex justify-between text-sm mb-2">
+                    <span>Решить 5 задач</span>
+                    <span className="text-primary">3/5</span>
+                  </div>
+                  <Progress value={60} className="h-2" />
+                </div>
+                <div>
+                  <div className="flex justify-between text-sm mb-2">
+                    <span>Изучить новую тему</span>
+                    <span className="text-primary">1/1</span>
+                  </div>
+                  <Progress value={100} className="h-2" />
+                </div>
+              </div>
+            </Card>
+
+            <Card className="p-6 hover:shadow-lg transition-shadow">
               <h3 className="text-lg font-semibold mb-4 flex items-center gap-2">
                 <Settings className="h-5 w-5" />
                 Настройки
@@ -215,34 +257,44 @@ const Profile = () => {
             </Card>
           </div>
 
-          {/* Правая колонка - прогресс и достижения */}
           <div className="md:col-span-8 space-y-6">
-            {/* Прогресс по предметам */}
-            <Card className="p-6">
-              <h3 className="text-lg font-semibold mb-4">Прогресс по предметам</h3>
+            <Card className="p-6 hover:shadow-lg transition-shadow">
+              <h3 className="text-lg font-semibold mb-4 flex items-center gap-2">
+                <BookOpen className="h-5 w-5 text-primary" />
+                Прогресс по предметам
+              </h3>
               <div className="space-y-4">
                 {profile.subjects.map((subject) => (
-                  <div key={subject.subject} className="space-y-2">
+                  <div 
+                    key={subject.subject} 
+                    className="space-y-2 p-4 rounded-lg hover:bg-primary/5 transition-colors cursor-pointer"
+                    onClick={() => navigate(`/${subject.subject.toLowerCase()}`)}
+                  >
                     <div className="flex justify-between">
                       <span className="text-sm font-medium">{subject.subject}</span>
                       <span className="text-sm text-muted-foreground">
                         {subject.completedTasks}/{subject.totalTasks} заданий
                       </span>
                     </div>
-                    <Progress value={subject.progress} className="h-2" />
+                    <Progress 
+                      value={subject.progress} 
+                      className="h-2 bg-primary/10" 
+                    />
                   </div>
                 ))}
               </div>
             </Card>
 
-            {/* Достижения */}
-            <Card className="p-6">
-              <h3 className="text-lg font-semibold mb-4">Достижения</h3>
+            <Card className="p-6 hover:shadow-lg transition-shadow">
+              <h3 className="text-lg font-semibold mb-4 flex items-center gap-2">
+                <Trophy className="h-5 w-5 text-primary" />
+                Последние достижения
+              </h3>
               <div className="grid gap-4 md:grid-cols-2">
                 {profile.achievements.map((achievement) => (
                   <div
                     key={achievement.id}
-                    className={`p-4 rounded-lg border ${
+                    className={`p-4 rounded-lg border transform hover:scale-105 transition-all cursor-pointer ${
                       achievement.earned 
                         ? 'bg-primary/5 border-primary/20' 
                         : 'bg-muted/50 border-muted'
