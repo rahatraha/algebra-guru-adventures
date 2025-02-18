@@ -19,7 +19,7 @@ const Navbar = () => {
 
   const navItems = [
     { title: "Главная", path: "/" },
-    { title: "Алгебра", path: "/algebra" },
+    { title: "Математика", path: "/mathematics" },
     { title: "Русский язык", path: "/russian" },
     { title: "Калькулятор", path: "/calculator" },
     { title: "Достижения", path: "/achievements" },
