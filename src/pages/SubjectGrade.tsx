@@ -49,8 +49,8 @@ const getGradesForSubject = (subject: SubjectId): number[] => {
     case "literature":
       return [5, 6, 7, 8, 9];
     case "social":
-    case "history":
-      return [6, 7, 8, 9];
+    case "history":  // изменяем здесь - история теперь начинается с 5 класса
+      return [5, 6, 7, 8, 9];
     default:
       return [5, 6, 7, 8, 9];
   }
