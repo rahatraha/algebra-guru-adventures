@@ -110,7 +110,7 @@ const Index = () => {
                   <span className="mr-2">{subject.icon}</span>
                   {subject.name}
                 </h3>
-                <Star className="h-6 w-6 text-edu-accent bg-slate-50" />
+                <Star className="h-6 w-6 text-edu-accent bg-transparent" />
               </div>
               <p className="text-gray-600 mb-4">
                 {subject.grades.length === 5 ? "5-9 классы" : subject.grades.length === 3 ? "7-9 классы" : "8-9 классы"}
