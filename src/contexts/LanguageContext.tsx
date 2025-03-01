@@ -37,7 +37,11 @@ const translations = {
     'examples': 'Примеры',
     'exercises': 'Упражнения',
     'topic_not_found': 'Тема не найдена',
-    'topic_not_found_message': 'Извините, запрашиваемая тема не существует или была удалена.'
+    'topic_not_found_message': 'Извините, запрашиваемая тема не существует или была удалена.',
+    'example': 'Пример',
+    'exercise': 'Упражнение',
+    'solution': 'Решение',
+    'show_answer': 'Показать ответ'
   },
   kz: {
     'home': 'Басты бет',
@@ -66,7 +70,11 @@ const translations = {
     'examples': 'Мысалдар',
     'exercises': 'Жаттығулар',
     'topic_not_found': 'Тақырып табылмады',
-    'topic_not_found_message': 'Кешіріңіз, сұралған тақырып жоқ немесе жойылды.'
+    'topic_not_found_message': 'Кешіріңіз, сұралған тақырып жоқ немесе жойылды.',
+    'example': 'Мысал',
+    'exercise': 'Жаттығу',
+    'solution': 'Шешім',
+    'show_answer': 'Жауабын көрсету'
   }
 };
 

@@ -1,6 +1,7 @@
 
 import { Button } from "@/components/ui/button";
 import { CheckCircle2 } from "lucide-react";
+import { useLanguage } from "@/contexts/LanguageContext";
 
 interface Exercise {
   problem: string;
@@ -12,11 +13,13 @@ interface ExercisesContentProps {
 }
 
 export const ExercisesContent = ({ exercises }: ExercisesContentProps) => {
+  const { t } = useLanguage();
+  
   return (
     <div className="space-y-6">
       {exercises.map((exercise, index) => (
         <div key={index} className="bg-white p-4 rounded-lg border">
-          <h3 className="font-semibold mb-2">Упражнение {index + 1}</h3>
+          <h3 className="font-semibold mb-2">{t('exercise')} {index + 1}</h3>
           <p className="mb-4">{exercise.problem}</p>
           <Button 
             variant="outline"
@@ -28,7 +31,7 @@ export const ExercisesContent = ({ exercises }: ExercisesContentProps) => {
               }
             }}
           >
-            <span id={`answer-${index}`}>Показать ответ</span>
+            <span id={`answer-${index}`}>{t('show_answer')}</span>
             <CheckCircle2 className="h-4 w-4 ml-2" />
           </Button>
         </div>
