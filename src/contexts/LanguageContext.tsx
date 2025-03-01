@@ -41,7 +41,8 @@ const translations = {
     'example': 'Пример',
     'exercise': 'Упражнение',
     'solution': 'Решение',
-    'show_answer': 'Показать ответ'
+    'show_answer': 'Показать ответ',
+    'hide_answer': 'Скрыть ответ'
   },
   kz: {
     'home': 'Басты бет',
@@ -74,7 +75,8 @@ const translations = {
     'example': 'Мысал',
     'exercise': 'Жаттығу',
     'solution': 'Шешім',
-    'show_answer': 'Жауабын көрсету'
+    'show_answer': 'Жауабын көрсету',
+    'hide_answer': 'Жауабын жасыру'
   }
 };
 
