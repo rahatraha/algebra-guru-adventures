@@ -1,6 +1,8 @@
 import { Link, useParams } from "react-router-dom";
 import Navbar from "../components/layout/Navbar";
 import { Book } from "lucide-react";
+import { useLanguage } from "@/contexts/LanguageContext";
+import { subjectNames } from "../data/subjects";
 
 type SubjectId = 
   | "russian" 
@@ -14,22 +16,8 @@ type SubjectId =
   | "biology" 
   | "social" 
   | "informatics" 
-  | "english";
-
-const subjectNames: Record<SubjectId, string> = {
-  russian: "Русский язык",
-  literature: "Литература",
-  algebra: "Алгебра",
-  geometry: "Геометрия",
-  history: "История",
-  geography: "География",
-  physics: "Физика",
-  chemistry: "Химия",
-  biology: "Биология",
-  social: "Обществознание",
-  informatics: "Информатика",
-  english: "Английский язык"
-};
+  | "english"
+  | "kazakh";
 
 const getGradesForSubject = (subject: SubjectId): number[] => {
   switch (subject) {
@@ -417,13 +405,51 @@ const topics = {
       "Экономика",
       "Право"
     ]
+  },
+  kazakh: {
+    5: [
+      "Фонетика",
+      "Лексика",
+      "Морфология",
+      "Синтаксис",
+      "Стилистика"
+    ],
+    6: [
+      "Имя существительное",
+      "Имя прилагательное",
+      "Имя числительное",
+      "Местоимение",
+      "Глагол"
+    ],
+    7: [
+      "Причастие",
+      "Деепричастие",
+      "Наречие",
+      "Служебные части речи",
+      "Междометие"
+    ],
+    8: [
+      "Словосочетание",
+      "Простое предложение",
+      "Главные члены предложения",
+      "Второстепенные члены предложения",
+      "Односоставные предложения"
+    ],
+    9: [
+      "Сложное предложение",
+      "Сложносочиненные предложения",
+      "Сложноподчиненные предложения",
+      "Бессоюзные сложные предложения",
+      "Сложные предложения с разными видами связи"
+    ]
   }
 };
 
 const SubjectGrade = () => {
   const { subject } = useParams<{ subject: SubjectId }>();
+  const { language } = useLanguage();
   
-  if (!subject || !subjectNames[subject]) {
+  if (!subject || !subjectNames[language][subject]) {
     return <div>Предмет не найден</div>;
   }
 
@@ -434,7 +460,7 @@ const SubjectGrade = () => {
       <Navbar />
       <main className="container mx-auto px-4 py-8">
         <h1 className="text-3xl font-bold text-gray-900 mb-8">
-          {subjectNames[subject]}
+          {subjectNames[language][subject]}
         </h1>
         
         <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">

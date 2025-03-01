@@ -7,9 +7,11 @@ import { topics } from "../data/subjects";
 import { TheoryContent } from "@/components/topic/TheoryContent";
 import { ExamplesContent } from "@/components/topic/ExamplesContent";
 import { ExercisesContent } from "@/components/topic/ExercisesContent";
+import { useLanguage } from "@/contexts/LanguageContext";
 
 const TopicDetails = () => {
   const { subject, grade, topicId } = useParams();
+  const { t } = useLanguage();
   
   if (!subject || !grade || !topicId || !topics[subject]?.[grade]?.[topicId]) {
     return (
@@ -18,8 +20,8 @@ const TopicDetails = () => {
         <main className="container mx-auto px-4 py-8">
           <Card className="p-6">
             <div className="text-center">
-              <h2 className="text-2xl font-bold text-gray-900 mb-2">Тема не найдена</h2>
-              <p className="text-gray-600">Извините, запрашиваемая тема не существует или была удалена.</p>
+              <h2 className="text-2xl font-bold text-gray-900 mb-2">{t('topic_not_found')}</h2>
+              <p className="text-gray-600">{t('topic_not_found_message')}</p>
             </div>
           </Card>
         </main>
@@ -38,9 +40,9 @@ const TopicDetails = () => {
             <CardContent className="p-6">
               <Tabs defaultValue="theory" className="w-full">
                 <TabsList className="grid w-full grid-cols-3">
-                  <TabsTrigger value="theory">Теория</TabsTrigger>
-                  <TabsTrigger value="examples">Примеры</TabsTrigger>
-                  <TabsTrigger value="exercises">Упражнения</TabsTrigger>
+                  <TabsTrigger value="theory">{t('theory')}</TabsTrigger>
+                  <TabsTrigger value="examples">{t('examples')}</TabsTrigger>
+                  <TabsTrigger value="exercises">{t('exercises')}</TabsTrigger>
                 </TabsList>
                 
                 <TabsContent value="theory">
