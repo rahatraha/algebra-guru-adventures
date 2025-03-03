@@ -1,13 +1,104 @@
-
 import { Link } from "react-router-dom";
 import { Flame, Trophy, Star, ChevronRight } from "lucide-react";
 import Navbar from "../components/layout/Navbar";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { subjectNames } from "../data/subjects";
 import { Card } from "@/components/ui/card";
+import { useEffect, useRef } from "react";
 
 const Index = () => {
   const { t, language } = useLanguage();
+  const mainRef = useRef<HTMLDivElement>(null);
+  
+  useEffect(() => {
+    if (!mainRef.current) return;
+    
+    // Clean up any previous elements
+    const existingElements = mainRef.current.querySelectorAll('.duolingo-shape');
+    existingElements.forEach(el => el.remove());
+    
+    // Add Duolingo-inspired decorative shapes in the background
+    const shapes = [
+      { type: 'circle', color: '#6366F130', size: '100px' },
+      { type: 'circle', color: '#10B98130', size: '80px' }, 
+      { type: 'circle', color: '#F59E0B30', size: '120px' },
+      { type: 'square', color: '#8B5CF630', size: '90px' },
+      { type: 'square', color: '#6366F130', size: '70px' },
+      { type: 'triangle', color: '#10B98130', size: '100px' },
+      { type: 'triangle', color: '#F59E0B30', size: '80px' },
+      { type: 'zigzag', color: '#6366F130', size: '150px' }
+    ];
+    
+    shapes.forEach((shape, index) => {
+      const element = document.createElement('div');
+      element.className = 'duolingo-shape';
+      
+      if (shape.type === 'circle') {
+        element.style.width = shape.size;
+        element.style.height = shape.size;
+        element.style.borderRadius = '50%';
+        element.style.backgroundColor = shape.color;
+      } else if (shape.type === 'square') {
+        element.style.width = shape.size;
+        element.style.height = shape.size;
+        element.style.backgroundColor = shape.color;
+        element.style.transform = `rotate(${Math.random() * 45}deg)`;
+      } else if (shape.type === 'triangle') {
+        const sizeNum = parseInt(shape.size);
+        element.style.width = '0';
+        element.style.height = '0';
+        element.style.borderLeft = `${sizeNum/2}px solid transparent`;
+        element.style.borderRight = `${sizeNum/2}px solid transparent`;
+        element.style.borderBottom = `${sizeNum}px solid ${shape.color}`;
+      } else if (shape.type === 'zigzag') {
+        const sizeNum = parseInt(shape.size);
+        element.style.width = shape.size;
+        element.style.height = `${sizeNum/5}px`;
+        element.style.backgroundImage = `linear-gradient(135deg, ${shape.color} 25%, transparent 25%), 
+                                       linear-gradient(225deg, ${shape.color} 25%, transparent 25%), 
+                                       linear-gradient(315deg, ${shape.color} 25%, transparent 25%), 
+                                       linear-gradient(45deg, ${shape.color} 25%, transparent 25%)`;
+        element.style.backgroundSize = `${sizeNum/3}px ${sizeNum/3}px`;
+      }
+      
+      // Position randomly on the page
+      element.style.top = `${Math.random() * 100}%`;
+      element.style.left = `${Math.random() * 100}%`;
+      
+      // Add some will float randomly (Duolingo style)
+      if (index % 3 === 0) {
+        element.style.animation = `float ${5 + Math.random() * 5}s ease-in-out infinite`;
+        element.style.animationDelay = `${Math.random() * 2}s`;
+      }
+      
+      mainRef.current?.appendChild(element);
+    });
+    
+    // Add some educational symbols
+    const symbols = ['∑', '∫', '√', 'π', 'θ', '∞', 'Δ', '≥', 'α', 'β', '÷', '×'];
+    for (let i = 0; i < 15; i++) {
+      const symbol = document.createElement('div');
+      symbol.className = 'duolingo-shape';
+      symbol.textContent = symbols[Math.floor(Math.random() * symbols.length)];
+      symbol.style.fontSize = `${30 + Math.random() * 20}px`;
+      symbol.style.color = ['#6366F1', '#10B981', '#F59E0B', '#8B5CF6'][Math.floor(Math.random() * 4)] + '30';
+      symbol.style.top = `${Math.random() * 100}%`;
+      symbol.style.left = `${Math.random() * 100}%`;
+      symbol.style.fontWeight = 'bold';
+      
+      // Rotate some symbols for visual interest
+      symbol.style.transform = `rotate(${Math.random() * 40 - 20}deg)`;
+      
+      // Float animation for some symbols
+      if (i % 4 === 0) {
+        symbol.style.animation = `float ${5 + Math.random() * 5}s ease-in-out infinite`;
+        symbol.style.animationDelay = `${Math.random() * 2}s`;
+      }
+      
+      mainRef.current?.appendChild(symbol);
+    }
+    
+  }, []);
   
   const subjects = [
     {
@@ -107,9 +198,9 @@ const Index = () => {
     <div className="min-h-screen bg-gray-50">
       <Navbar />
       
-      <main className="container mx-auto px-4 py-8">
+      <main ref={mainRef} className="container mx-auto px-4 py-8 relative overflow-hidden">
         {/* Hero Section */}
-        <div className="text-center mb-12 animate-fade-in">
+        <div className="text-center mb-12 animate-fade-in relative z-10">
           <h1 className="text-4xl sm:text-5xl font-bold text-edu-primary mb-4">
             {t('welcome')}
           </h1>
@@ -119,8 +210,8 @@ const Index = () => {
         </div>
 
         {/* User Progress Section */}
-        <Card className="p-6 mb-10 bg-gradient-to-br from-edu-primary/5 to-edu-primary/10 border-2 border-edu-primary/20 rounded-2xl">
-          <div className="flex items-center justify-between">
+        <Card className="p-6 mb-10 bg-gradient-to-br from-edu-primary/5 to-edu-primary/10 border-2 border-edu-primary/20 rounded-2xl progress-card-bg">
+          <div className="flex items-center justify-between relative z-10">
             <div>
               <h2 className="text-2xl font-bold text-edu-primary">{t('level')} 1</h2>
               <p className="text-gray-600">100/300 {t('to_next_level')}</p>
@@ -138,21 +229,36 @@ const Index = () => {
           </div>
           
           {/* Progress Bar */}
-          <div className="mt-4 h-3 bg-white rounded-full overflow-hidden">
+          <div className="mt-4 h-3 bg-white rounded-full overflow-hidden relative z-10">
             <div className="h-full bg-gradient-to-r from-edu-primary to-edu-secondary rounded-full w-1/3 transition-all duration-500"></div>
+          </div>
+          
+          {/* Duolingo-inspired decorative pattern for progress card */}
+          <div className="absolute bottom-2 right-2 flex gap-1">
+            {[...Array(4)].map((_, i) => (
+              <div 
+                key={i} 
+                className="rounded-full" 
+                style={{
+                  width: 6, 
+                  height: 6, 
+                  backgroundColor: ['#6366F1', '#10B981', '#F59E0B', '#8B5CF6'][i]
+                }}
+              ></div>
+            ))}
           </div>
         </Card>
 
         {/* Subjects Grid */}
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 mb-12">
+        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 mb-12 relative z-10">
           {subjects.map(subject => (
             <Link 
               key={subject.id} 
               to={`/${subject.id}`} 
               className="group"
             >
-              <Card className={`bg-gradient-to-br ${subject.color} border-2 p-5 rounded-xl transition-all duration-300 hover:shadow-md hover:-translate-y-1`}>
-                <div className="flex items-center justify-between">
+              <Card className={`bg-gradient-to-br ${subject.color} border-2 p-5 rounded-xl transition-all duration-300 hover:shadow-md hover:-translate-y-1 subject-card`}>
+                <div className="flex items-center justify-between relative z-10">
                   <div className="flex items-center">
                     <span className="text-3xl mr-3">{subject.icon}</span>
                     <div>
@@ -183,7 +289,7 @@ const Index = () => {
         </div>
 
         {/* Daily Challenge Section */}
-        <Card className="p-6 bg-gradient-to-br from-edu-accent/10 to-edu-accent/20 border-2 border-edu-accent/30 rounded-2xl mb-8">
+        <Card className="p-6 bg-gradient-to-br from-edu-accent/10 to-edu-accent/20 border-2 border-edu-accent/30 rounded-2xl mb-8 relative z-10">
           <div className="flex items-center justify-between mb-6">
             <h2 className="text-2xl font-bold text-edu-accent">
               {t('daily_challenge')}

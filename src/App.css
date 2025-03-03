@@ -101,3 +101,78 @@ body::before {
 .float-animation {
   animation: float 8s ease-in-out infinite;
 }
+
+/* User progress card background with educational elements */
+.progress-card-bg {
+  position: relative;
+  overflow: hidden;
+}
+
+.progress-card-bg::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-image: 
+    radial-gradient(circle at 50px 50px, rgba(99, 102, 241, 0.07) 10px, transparent 10px),
+    radial-gradient(circle at 150px 100px, rgba(16, 185, 129, 0.05) 15px, transparent 15px),
+    radial-gradient(circle at 200px 30px, rgba(245, 158, 11, 0.07) 8px, transparent 8px);
+  z-index: 0;
+}
+
+/* Subject card backgrounds */
+.subject-card {
+  position: relative;
+  overflow: hidden;
+  z-index: 1;
+}
+
+.subject-card::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-image: 
+    radial-gradient(circle at 20% 80%, rgba(255, 255, 255, 0.4) 8px, transparent 8px),
+    radial-gradient(circle at 80% 20%, rgba(255, 255, 255, 0.3) 10px, transparent 10px);
+  pointer-events: none;
+  z-index: -1;
+}
+
+/* Subject card hover effect */
+.subject-card:hover::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-image: 
+    linear-gradient(45deg, rgba(255, 255, 255, 0.1) 25%, transparent 25%, transparent 50%, 
+    rgba(255, 255, 255, 0.1) 50%, rgba(255, 255, 255, 0.1) 75%, transparent 75%, transparent);
+  background-size: 10px 10px;
+  z-index: -1;
+  animation: shine 2s linear infinite;
+  opacity: 0.5;
+}
+
+@keyframes shine {
+  0% {
+    background-position: 0 0;
+  }
+  100% {
+    background-position: 50px 50px;
+  }
+}
+
+/* Duolingo-inspired shapes */
+.duolingo-shape {
+  position: absolute;
+  z-index: 0;
+  opacity: 0.1;
+  pointer-events: none;
+}
