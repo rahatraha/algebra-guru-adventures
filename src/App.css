@@ -176,3 +176,66 @@ body::before {
   opacity: 0.1;
   pointer-events: none;
 }
+
+/* Educational background with math formulas and symbols */
+.math-bg {
+  position: absolute;
+  font-family: 'Times New Roman', serif;
+  opacity: 0.05;
+  pointer-events: none;
+  z-index: 0;
+  font-weight: bold;
+  transform: rotate(var(--rotate, 0deg));
+}
+
+/* Notebook paper background */
+.notebook-bg {
+  position: relative;
+  background-color: white;
+  background-image:
+    linear-gradient(#f1f1f1 1px, transparent 1px),
+    linear-gradient(90deg, #f1f1f1 1px, transparent 1px);
+  background-size: 20px 20px;
+  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
+}
+
+/* Book stack decoration */
+.book-stack {
+  position: absolute;
+  right: -30px;
+  bottom: -20px;
+  opacity: 0.15;
+  transform: rotate(15deg);
+  z-index: 0;
+}
+
+.book {
+  height: 15px;
+  width: 60px;
+  margin-bottom: 3px;
+  border-radius: 2px;
+}
+
+/* Educational achievement badge */
+.achievement-badge {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: linear-gradient(45deg, var(--badge-color-1, #FFC107), var(--badge-color-2, #FF9800));
+  box-shadow: 0 3px 5px rgba(0,0,0,0.2);
+  z-index: 1;
+}
+
+.achievement-badge::after {
+  content: '';
+  position: absolute;
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  background: white;
+  z-index: -1;
+}
