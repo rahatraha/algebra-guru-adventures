@@ -61,11 +61,9 @@ const Index = () => {
         element.style.backgroundSize = `${sizeNum/3}px ${sizeNum/3}px`;
       }
       
-      // Position randomly on the page
       element.style.top = `${Math.random() * 100}%`;
       element.style.left = `${Math.random() * 100}%`;
       
-      // Add some will float randomly (Duolingo style)
       if (index % 3 === 0) {
         element.style.animation = `float ${5 + Math.random() * 5}s ease-in-out infinite`;
         element.style.animationDelay = `${Math.random() * 2}s`;
@@ -74,7 +72,6 @@ const Index = () => {
       mainRef.current?.appendChild(element);
     });
     
-    // Add some educational symbols
     const symbols = ['∑', '∫', '√', 'π', 'θ', '∞', 'Δ', '≥', 'α', 'β', '÷', '×'];
     for (let i = 0; i < 15; i++) {
       const symbol = document.createElement('div');
@@ -86,10 +83,8 @@ const Index = () => {
       symbol.style.left = `${Math.random() * 100}%`;
       symbol.style.fontWeight = 'bold';
       
-      // Rotate some symbols for visual interest
       symbol.style.transform = `rotate(${Math.random() * 40 - 20}deg)`;
       
-      // Float animation for some symbols
       if (i % 4 === 0) {
         symbol.style.animation = `float ${5 + Math.random() * 5}s ease-in-out infinite`;
         symbol.style.animationDelay = `${Math.random() * 2}s`;
@@ -97,6 +92,48 @@ const Index = () => {
       
       mainRef.current?.appendChild(symbol);
     }
+    
+    const paperTexture = document.createElement('div');
+    paperTexture.className = 'paper-texture';
+    document.body.appendChild(paperTexture);
+    
+    const eduGrid = document.createElement('div');
+    eduGrid.className = 'edu-grid';
+    document.body.appendChild(eduGrid);
+    
+    const formulas = [
+      'E = mc²', 
+      'a² + b² = c²', 
+      'F = ma', 
+      'PV = nRT',
+      'sin²θ + cos²θ = 1',
+      'y = mx + b',
+      'e^(iπ) + 1 = 0'
+    ];
+    
+    formulas.forEach(formula => {
+      const formulaEl = document.createElement('div');
+      formulaEl.className = 'math-bg';
+      formulaEl.textContent = formula;
+      formulaEl.style.fontSize = `${20 + Math.random() * 14}px`;
+      formulaEl.style.top = `${Math.random() * 100}%`;
+      formulaEl.style.left = `${Math.random() * 100}%`;
+      formulaEl.style.setProperty('--rotate', `${Math.random() * 40 - 20}deg`);
+      
+      if (Math.random() > 0.7) {
+        formulaEl.style.animation = `float ${7 + Math.random() * 6}s ease-in-out infinite`;
+        formulaEl.style.animationDelay = `${Math.random() * 3}s`;
+      }
+      
+      mainRef.current?.appendChild(formulaEl);
+    });
+    
+    return () => {
+      document.body.removeChild(paperTexture);
+      document.body.removeChild(eduGrid);
+      const mathBgs = mainRef.current?.querySelectorAll('.math-bg');
+      mathBgs?.forEach(el => el.remove());
+    };
     
   }, []);
   
@@ -195,7 +232,7 @@ const Index = () => {
   ];
 
   return (
-    <div className="min-h-screen bg-gray-50">
+    <div className="min-h-screen">
       <Navbar />
       
       <main ref={mainRef} className="container mx-auto px-4 py-8 relative overflow-hidden">
@@ -228,12 +265,10 @@ const Index = () => {
             </div>
           </div>
           
-          {/* Progress Bar */}
           <div className="mt-4 h-3 bg-white rounded-full overflow-hidden relative z-10">
             <div className="h-full bg-gradient-to-r from-edu-primary to-edu-secondary rounded-full w-1/3 transition-all duration-500"></div>
           </div>
           
-          {/* Duolingo-inspired decorative pattern for progress card */}
           <div className="absolute bottom-2 right-2 flex gap-1">
             {[...Array(4)].map((_, i) => (
               <div 
@@ -279,7 +314,6 @@ const Index = () => {
                     <ChevronRight className="h-6 w-6" />
                   </div>
                 </div>
-                {/* Progress Indicator */}
                 <div className="mt-4 h-2 bg-white/70 rounded-full overflow-hidden">
                   <div className="h-full bg-edu-primary/40 rounded-full w-1/4 transition-all duration-500"></div>
                 </div>
@@ -312,7 +346,6 @@ const Index = () => {
             </Link>
           </div>
           
-          {/* Examples of challenges */}
           <div className="mt-4 grid grid-cols-2 gap-4">
             <div className="bg-white p-3 rounded-lg shadow-sm border border-edu-accent/20">
               <div className="flex items-center gap-2 mb-2">
@@ -330,6 +363,20 @@ const Index = () => {
             </div>
           </div>
         </Card>
+        
+        {/* Book stack decoration */}
+        <div className="book-stack">
+          {[...Array(5)].map((_, i) => (
+            <div 
+              key={i} 
+              className="book" 
+              style={{ 
+                backgroundColor: ['#6366F1', '#10B981', '#F59E0B', '#8B5CF6', '#EC4899'][i % 5],
+                width: `${50 + Math.random() * 20}px`
+              }}
+            ></div>
+          ))}
+        </div>
       </main>
     </div>
   );
