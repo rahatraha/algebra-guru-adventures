@@ -17,37 +17,51 @@ const subjectVideos = {
   mathematics: [
     "M9S5wG6_314", // Khan Academy math basics
     "EsDhJg9fH-c", // Math for beginners
-    "pTnEG_WGd2Q"  // Math principles
+    "pTnEG_WGd2Q", // Math principles
+    "X6JQnHPbv3U", // Addition and subtraction
+    "idrqvvTC3I0"  // Multiplication and division
   ],
   algebra: [
     "LwCRRUa9D1g", // Algebra basics
     "i6sbjtJjmyQ", // Linear equations
-    "XUxJSVReKEQ"  // Quadratic equations
+    "XUxJSVReKEQ", // Quadratic equations
+    "NybHckSEQBI", // Polynomial expressions
+    "C6vVp3cmp5Y"  // Systems of equations
   ],
   russian: [
     "c7D5nzOEh8k", // Russian language basics
     "LTysUdbJg6s", // Russian grammar
-    "Hr5LkW-SHdM"  // Russian vocabulary
+    "Hr5LkW-SHdM", // Russian vocabulary
+    "F_SF5UX7-Zw", // Russian pronunciation
+    "yfzGWYbFTKA"  // Russian writing
   ],
   english: [
     "tL2M_VmKCh0", // English for beginners
     "XAD0tuZZcfU", // English grammar
-    "wKRDSLtgVJA"  // English vocabulary
+    "wKRDSLtgVJA", // English vocabulary
+    "SsQPMU8NrLM", // English pronunciation
+    "qR0bDq5qMXE"  // English writing
   ],
   kazakh: [
     "LuVQWech6qk", // Kazakh language basics
     "yYIYnreFbmc", // Kazakh grammar
-    "VHCJE0prs8A"  // Kazakh vocabulary
+    "VHCJE0prs8A", // Kazakh vocabulary
+    "sPMGvCHHnkk", // Kazakh pronunciation
+    "6vJdhbx_JEI"  // Kazakh culture
   ],
   geography: [
     "LWLl9RVN4QM", // Geography basics
     "K5yYBCgZ2ew", // Countries and capitals
-    "qrp0t8xTiF8"  // Earth's structure
+    "qrp0t8xTiF8", // Earth's structure
+    "zuRn3eVK39g", // Map reading
+    "Do-MxXVas_M"  // Tectonic plates
   ],
   history: [
     "Yocja_N5s1I", // World history
     "C6rQ6xQ0ByA", // Ancient civilizations
-    "LL_VKCGzpCU"  // Modern history
+    "LL_VKCGzpCU", // Modern history
+    "Mh5LY4Mz15o", // Medieval history
+    "a-XmCcKGj1I"  // Renaissance period
   ]
 };
 
@@ -205,7 +219,7 @@ const keyFormulas = {
 
 const TopicDetails = () => {
   const { subject, grade, topicId } = useParams();
-  const { t, locale } = useLanguage();
+  const { t, currentLanguage } = useLanguage();
   
   if (!subject || !grade || !topicId || !topics[subject]?.[grade]?.[topicId]) {
     return (
@@ -242,7 +256,7 @@ const TopicDetails = () => {
       "history": ["История", "Тарих"]
     };
     
-    return subjectKeys[subject] ? (locale === 'ru' ? subjectKeys[subject][0] : subjectKeys[subject][1]) : subject;
+    return subjectKeys[subject] ? (currentLanguage === 'ru' ? subjectKeys[subject][0] : subjectKeys[subject][1]) : subject;
   };
 
   // Get videos for current subject
@@ -252,12 +266,12 @@ const TopicDetails = () => {
   
   // Get resources for current subject
   const getResources = () => {
-    return additionalResources[subject]?.[locale === 'ru' ? 'ru' : 'kz'] || additionalResources.mathematics[locale === 'ru' ? 'ru' : 'kz'];
+    return additionalResources[subject]?.[currentLanguage === 'ru' ? 'ru' : 'kz'] || additionalResources.mathematics[currentLanguage === 'ru' ? 'ru' : 'kz'];
   };
 
   // Get formulas if applicable
   const getFormulas = () => {
-    return keyFormulas[subject]?.[locale === 'ru' ? 'ru' : 'kz'];
+    return keyFormulas[subject]?.[currentLanguage === 'ru' ? 'ru' : 'kz'];
   };
 
   return (
@@ -328,12 +342,29 @@ const TopicDetails = () => {
                         {/* Video lessons */}
                         <div className="mt-8">
                           <h3 className="text-lg font-semibold text-gray-800 mb-3">{t('video_lessons')}</h3>
-                          <div className="space-y-4">
+                          <div className="space-y-6">
                             {getTopicVideos().map((videoId, index) => (
-                              <div key={index} className="rounded-lg overflow-hidden border border-gray-200">
+                              <div key={index} className="rounded-lg overflow-hidden border border-gray-200 shadow-sm">
+                                <h4 className="px-4 py-2 bg-gray-100 text-gray-700 font-medium border-b">{t('video')} {index + 1}</h4>
                                 <YoutubeVideo videoId={videoId} />
                               </div>
                             ))}
+                          </div>
+                        </div>
+                        
+                        {/* Interactive learning section */}
+                        <div className="mt-8 bg-green-50 p-4 rounded-lg border border-green-100">
+                          <h3 className="text-lg font-semibold text-green-800 mb-2">{t('interactive_learning')}</h3>
+                          <p className="text-green-700 mb-3">{t('interactive_learning_desc')}</p>
+                          <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                            <div className="bg-white p-3 rounded border border-green-200 shadow-sm">
+                              <h4 className="font-medium text-green-800">{t('quizzes')}</h4>
+                              <p className="text-sm text-green-600">{t('quizzes_desc')}</p>
+                            </div>
+                            <div className="bg-white p-3 rounded border border-green-200 shadow-sm">
+                              <h4 className="font-medium text-green-800">{t('flashcards')}</h4>
+                              <p className="text-sm text-green-600">{t('flashcards_desc')}</p>
+                            </div>
                           </div>
                         </div>
                       </TabsContent>
@@ -348,6 +379,8 @@ const TopicDetails = () => {
                             <li>{t('tip_1')}</li>
                             <li>{t('tip_2')}</li>
                             <li>{t('tip_3')}</li>
+                            <li>{t('tip_4')}</li>
+                            <li>{t('tip_5')}</li>
                           </ul>
                         </div>
                         
@@ -367,7 +400,25 @@ const TopicDetails = () => {
                               <span className="text-red-500 mr-2">✗</span>
                               <span className="text-red-700">{t('mistake_3')}</span>
                             </li>
+                            <li className="flex items-start">
+                              <span className="text-red-500 mr-2">✗</span>
+                              <span className="text-red-700">{t('mistake_4')}</span>
+                            </li>
                           </ul>
+                        </div>
+                        
+                        {/* Step-by-step solutions */}
+                        <div className="mt-8 bg-indigo-50 p-4 rounded-lg border border-indigo-100">
+                          <h3 className="text-lg font-semibold text-indigo-800 mb-2">{t('step_by_step_solutions')}</h3>
+                          <div className="bg-white p-4 rounded border border-indigo-200">
+                            <h4 className="font-medium text-indigo-800 mb-2">{t('example')} X:</h4>
+                            <ol className="list-decimal list-inside space-y-3 text-indigo-700">
+                              <li className="p-2 bg-indigo-50 rounded">{t('step')} 1: {t('step_1_desc')}</li>
+                              <li className="p-2 bg-indigo-50 rounded">{t('step')} 2: {t('step_2_desc')}</li>
+                              <li className="p-2 bg-indigo-50 rounded">{t('step')} 3: {t('step_3_desc')}</li>
+                              <li className="p-2 bg-indigo-50 rounded">{t('step')} 4: {t('step_4_desc')}</li>
+                            </ol>
+                          </div>
                         </div>
                       </TabsContent>
 
@@ -390,6 +441,14 @@ const TopicDetails = () => {
                               <p className="font-medium">{t('exercise')} 3:</p>
                               <p>{t('additional_exercise_3')}</p>
                             </li>
+                            <li className="p-2 bg-indigo-100/50 rounded">
+                              <p className="font-medium">{t('exercise')} 4:</p>
+                              <p>{t('additional_exercise_4')}</p>
+                            </li>
+                            <li className="p-2 bg-indigo-100/50 rounded">
+                              <p className="font-medium">{t('exercise')} 5:</p>
+                              <p>{t('additional_exercise_5')}</p>
+                            </li>
                           </ul>
                         </div>
                         
@@ -400,7 +459,33 @@ const TopicDetails = () => {
                             <li>{t('guideline_1')}</li>
                             <li>{t('guideline_2')}</li>
                             <li>{t('guideline_3')}</li>
+                            <li>{t('guideline_4')}</li>
+                            <li>{t('guideline_5')}</li>
                           </ol>
+                        </div>
+                        
+                        {/* Self-assessment */}
+                        <div className="mt-8 bg-amber-50 p-4 rounded-lg border border-amber-100">
+                          <h3 className="text-lg font-semibold text-amber-800 mb-2">{t('self_assessment')}</h3>
+                          <p className="text-amber-700 mb-3">{t('self_assessment_desc')}</p>
+                          <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                            <div className="bg-white p-3 rounded border border-amber-200 shadow-sm">
+                              <h4 className="font-medium text-amber-800">{t('level_1')} - {t('basic')}</h4>
+                              <p className="text-sm text-amber-600">{t('level_1_desc')}</p>
+                            </div>
+                            <div className="bg-white p-3 rounded border border-amber-200 shadow-sm">
+                              <h4 className="font-medium text-amber-800">{t('level_2')} - {t('intermediate')}</h4>
+                              <p className="text-sm text-amber-600">{t('level_2_desc')}</p>
+                            </div>
+                            <div className="bg-white p-3 rounded border border-amber-200 shadow-sm">
+                              <h4 className="font-medium text-amber-800">{t('level_3')} - {t('advanced')}</h4>
+                              <p className="text-sm text-amber-600">{t('level_3_desc')}</p>
+                            </div>
+                            <div className="bg-white p-3 rounded border border-amber-200 shadow-sm">
+                              <h4 className="font-medium text-amber-800">{t('level_4')} - {t('expert')}</h4>
+                              <p className="text-sm text-amber-600">{t('level_4_desc')}</p>
+                            </div>
+                          </div>
                         </div>
                       </TabsContent>
                     </ScrollArea>
@@ -441,7 +526,7 @@ const TopicDetails = () => {
                 </CardHeader>
                 <CardContent className="p-4">
                   <ul className="space-y-2">
-                    {onlinePlatforms[locale === 'ru' ? 'ru' : 'kz'].map((platform, index) => (
+                    {onlinePlatforms[currentLanguage === 'ru' ? 'ru' : 'kz'].map((platform, index) => (
                       <li key={index}>
                         <a 
                           href={platform.url} 
@@ -458,6 +543,56 @@ const TopicDetails = () => {
                 </CardContent>
               </Card>
               
+              {/* Study schedule */}
+              <Card>
+                <CardHeader>
+                  <CardTitle className="text-lg">{t('study_schedule')}</CardTitle>
+                </CardHeader>
+                <CardContent className="p-4">
+                  <div className="space-y-3">
+                    <div className="flex items-center p-2 bg-violet-50 rounded-lg">
+                      <div className="w-10 h-10 flex items-center justify-center bg-violet-100 rounded-full mr-3">
+                        <span className="text-violet-700">1</span>
+                      </div>
+                      <div className="flex-1">
+                        <p className="font-medium text-violet-900">{t('day')} 1</p>
+                        <p className="text-sm text-violet-700">{t('read_theory')}</p>
+                      </div>
+                    </div>
+                    
+                    <div className="flex items-center p-2 bg-indigo-50 rounded-lg">
+                      <div className="w-10 h-10 flex items-center justify-center bg-indigo-100 rounded-full mr-3">
+                        <span className="text-indigo-700">2</span>
+                      </div>
+                      <div className="flex-1">
+                        <p className="font-medium text-indigo-900">{t('day')} 2</p>
+                        <p className="text-sm text-indigo-700">{t('review_examples')}</p>
+                      </div>
+                    </div>
+                    
+                    <div className="flex items-center p-2 bg-blue-50 rounded-lg">
+                      <div className="w-10 h-10 flex items-center justify-center bg-blue-100 rounded-full mr-3">
+                        <span className="text-blue-700">3</span>
+                      </div>
+                      <div className="flex-1">
+                        <p className="font-medium text-blue-900">{t('day')} 3</p>
+                        <p className="text-sm text-blue-700">{t('do_exercises')}</p>
+                      </div>
+                    </div>
+                    
+                    <div className="flex items-center p-2 bg-teal-50 rounded-lg">
+                      <div className="w-10 h-10 flex items-center justify-center bg-teal-100 rounded-full mr-3">
+                        <span className="text-teal-700">4</span>
+                      </div>
+                      <div className="flex-1">
+                        <p className="font-medium text-teal-900">{t('day')} 4</p>
+                        <p className="text-sm text-teal-700">{t('practice_test')}</p>
+                      </div>
+                    </div>
+                  </div>
+                </CardContent>
+              </Card>
+              
               {/* Educational apps */}
               <Card>
                 <CardHeader>
@@ -465,7 +600,7 @@ const TopicDetails = () => {
                 </CardHeader>
                 <CardContent className="p-4">
                   <ul className="space-y-2">
-                    {educationalApps[locale === 'ru' ? 'ru' : 'kz'].map((app, index) => (
+                    {educationalApps[currentLanguage === 'ru' ? 'ru' : 'kz'].map((app, index) => (
                       <li key={index} className="flex items-center p-2 bg-gray-50 rounded">
                         <span className="text-purple-500 mr-2">📱</span>
                         {app}
