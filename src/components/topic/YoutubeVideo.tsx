@@ -7,7 +7,7 @@ interface YoutubeVideoProps {
 
 export const YoutubeVideo: React.FC<YoutubeVideoProps> = ({ videoId }) => {
   return (
-    <div className="relative w-full pb-[56.25%]">
+    <div className="relative w-full pb-[56.25%] mb-4 overflow-hidden rounded-lg shadow-md">
       <iframe 
         src={`https://www.youtube.com/embed/${videoId}?hl=ru&cc_lang_pref=ru&cc_load_policy=1`}
         title="Видео"
