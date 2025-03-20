@@ -5,7 +5,7 @@ export const englishData: SubjectData = {
   "5": {
     0: {
       theory: `
-        <h2>Present Simple Tense</h2>
+        <h2>Настоящее простое время</h2>
         <p>Настоящее простое время в английском языке.</p>
         <p>Основные правила и случаи употребления:</p>
         <ul>
@@ -30,7 +30,7 @@ export const englishData: SubjectData = {
     },
     1: {
       theory: `
-        <h2>Present Continuous Tense</h2>
+        <h2>Настоящее длительное время</h2>
         <p>Настоящее длительное время в английском языке.</p>
         <p>Основные правила и случаи употребления:</p>
         <ul>
@@ -55,7 +55,7 @@ export const englishData: SubjectData = {
     },
     2: {
       theory: `
-        <h2>Past Simple Tense</h2>
+        <h2>Прошедшее простое время</h2>
         <p>Прошедшее простое время в английском языке.</p>
         <p>Основные правила и случаи употребления:</p>
         <ul>
@@ -79,7 +79,7 @@ export const englishData: SubjectData = {
     },
     3: {
       theory: `
-        <h2>Future Simple Tense</h2>
+        <h2>Будущее простое время</h2>
         <p>Будущее простое время в английском языке.</p>
         <p>Основные правила и случаи употребления:</p>
         <ul>
@@ -106,7 +106,7 @@ export const englishData: SubjectData = {
   "6": {
     0: {
       theory: `
-        <h2>Present Perfect Tense</h2>
+        <h2>Настоящее совершенное время</h2>
         <p>Настоящее совершенное время в английском языке.</p>
         <p>Основные правила и случаи употребления:</p>
         <ul>

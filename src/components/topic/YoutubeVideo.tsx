@@ -9,8 +9,8 @@ export const YoutubeVideo: React.FC<YoutubeVideoProps> = ({ videoId }) => {
   return (
     <div className="relative w-full pb-[56.25%]">
       <iframe 
-        src={`https://www.youtube.com/embed/${videoId}`}
-        title="YouTube video player"
+        src={`https://www.youtube.com/embed/${videoId}?hl=ru&cc_lang_pref=ru&cc_load_policy=1`}
+        title="Видео"
         frameBorder="0"
         allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
         allowFullScreen

@@ -1,4 +1,3 @@
-
 import { useParams } from "react-router-dom";
 import Navbar from "../components/layout/Navbar";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
@@ -12,56 +11,49 @@ import { Separator } from "@/components/ui/separator";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import { YoutubeVideo } from "@/components/topic/YoutubeVideo";
 
-// YouTube video IDs for each subject
+// YouTube video IDs for each subject (Russian content)
 const subjectVideos = {
   mathematics: [
-    "M9S5wG6_314", // Khan Academy math basics
-    "EsDhJg9fH-c", // Math for beginners
-    "pTnEG_WGd2Q", // Math principles
-    "X6JQnHPbv3U", // Addition and subtraction
-    "idrqvvTC3I0"  // Multiplication and division
+    "AeIm5hKXiGM", // Математика для начинающих
+    "Ej0WXS9rdnk", // Основы математики
+    "f5BpX6XmW5s", // Математические принципы
+    "x04U0eDg_kI", // Сложение и вычитание
+    "6sVhQNYmEmg"  // Умножение и деление
   ],
   algebra: [
-    "LwCRRUa9D1g", // Algebra basics
-    "i6sbjtJjmyQ", // Linear equations
-    "XUxJSVReKEQ", // Quadratic equations
-    "NybHckSEQBI", // Polynomial expressions
-    "C6vVp3cmp5Y"  // Systems of equations
+    "g9QtF8xXAVc", // Основы алгебры
+    "TqfFX4_AAq0", // Линейные уравнения
+    "7P_JAMovIJE", // Квадратные уравнения
+    "6h7BmjGCRGo", // Многочлены
+    "jU08pyDHnm8"  // Системы уравнений
   ],
   russian: [
-    "c7D5nzOEh8k", // Russian language basics
-    "LTysUdbJg6s", // Russian grammar
-    "Hr5LkW-SHdM", // Russian vocabulary
-    "F_SF5UX7-Zw", // Russian pronunciation
-    "yfzGWYbFTKA"  // Russian writing
-  ],
-  english: [
-    "tL2M_VmKCh0", // English for beginners
-    "XAD0tuZZcfU", // English grammar
-    "wKRDSLtgVJA", // English vocabulary
-    "SsQPMU8NrLM", // English pronunciation
-    "qR0bDq5qMXE"  // English writing
+    "V-luLtQTeYk", // Основы русского языка
+    "AHb5JpCAHKM", // Русская грамматика
+    "s0yPNZWsYxo", // Русская лексика
+    "7FVXlVRrBtw", // Русское произношение
+    "JYvZw8UuMm8"  // Русское письмо
   ],
   kazakh: [
-    "LuVQWech6qk", // Kazakh language basics
-    "yYIYnreFbmc", // Kazakh grammar
-    "VHCJE0prs8A", // Kazakh vocabulary
-    "sPMGvCHHnkk", // Kazakh pronunciation
-    "6vJdhbx_JEI"  // Kazakh culture
+    "LuVQWech6qk", // Основы казахского языка
+    "yYIYnreFbmc", // Казахская грамматика
+    "VHCJE0prs8A", // Казахская лексика
+    "sPMGvCHHnkk", // Казахское произношение
+    "6vJdhbx_JEI"  // Казахская культура
   ],
   geography: [
-    "LWLl9RVN4QM", // Geography basics
-    "K5yYBCgZ2ew", // Countries and capitals
-    "qrp0t8xTiF8", // Earth's structure
-    "zuRn3eVK39g", // Map reading
-    "Do-MxXVas_M"  // Tectonic plates
+    "qs4Vz8g8W7g", // Основы географии
+    "jD7rGf8V1ko", // Страны и столицы
+    "nAtUYHI8NW0", // Строение Земли
+    "oCZ_fTbJ19Q", // Чтение карт
+    "OhyLzGUMIqc"  // Тектонические плиты
   ],
   history: [
-    "Yocja_N5s1I", // World history
-    "C6rQ6xQ0ByA", // Ancient civilizations
-    "LL_VKCGzpCU", // Modern history
-    "Mh5LY4Mz15o", // Medieval history
-    "a-XmCcKGj1I"  // Renaissance period
+    "eprPU2_14YQ", // Мировая история
+    "hXZSy_GpDGo", // Древние цивилизации
+    "mW6TlPMGUro", // Современная история
+    "y1QRCSVIiYU", // Средневековая история
+    "2PxyRr3j6nU"  // Эпоха Возрождения
   ]
 };
 
@@ -156,10 +148,10 @@ const additionalResources = {
 // Online educational platforms
 const onlinePlatforms = {
   ru: [
-    { name: "Coursera", url: "https://www.coursera.org/browse/arts-and-humanities" },
-    { name: "Khan Academy", url: "https://ru.khanacademy.org/" },
-    { name: "Stepik", url: "https://stepik.org/catalog" },
-    { name: "InternetUrok", url: "https://interneturok.ru/" }
+    { name: "Курсера", url: "https://www.coursera.org/browse/arts-and-humanities?facets=languages%3ARussian" },
+    { name: "Академия Хана", url: "https://ru.khanacademy.org/" },
+    { name: "Степик", url: "https://stepik.org/catalog" },
+    { name: "ИнтернетУрок", url: "https://interneturok.ru/" }
   ],
   kz: [
     { name: "BilimLand", url: "https://bilimland.kz/" },
@@ -174,13 +166,13 @@ const educationalApps = {
   ru: [
     "Photomath - решение математических задач",
     "Quizlet - изучение с карточками",
-    "Duolingo - изучение языков",
+    "Class.Edu - образовательные задания",
     "GeoGebra - интерактивная математика"
   ],
   kz: [
     "Photomath - математикалық есептердің шешімі",
     "Quizlet - карточкалармен оқыту",
-    "Duolingo - тілдерді үйрену",
+    "Class.Edu - білім беру тапсырмалары",
     "GeoGebra - интерактивті математика"
   ]
 };
@@ -197,7 +189,7 @@ const keyFormulas = {
     kz: [
       "Тікбұрыштың ауданы: S = a×b",
       "Үшбұрыштың ауданы: S = (a×h)/2",
-      "Параллелепипедтің көлемі: V = a×b×c",
+      "Параллелепипедт��ң көлемі: V = a×b×c",
       "Пифагор теоремасы: a²+b²=c²"
     ]
   },
@@ -219,7 +211,7 @@ const keyFormulas = {
 
 const TopicDetails = () => {
   const { subject, grade, topicId } = useParams();
-  const { t, currentLanguage } = useLanguage();
+  const { t, language } = useLanguage();
   
   if (!subject || !grade || !topicId || !topics[subject]?.[grade]?.[topicId]) {
     return (
@@ -256,7 +248,7 @@ const TopicDetails = () => {
       "history": ["История", "Тарих"]
     };
     
-    return subjectKeys[subject] ? (currentLanguage === 'ru' ? subjectKeys[subject][0] : subjectKeys[subject][1]) : subject;
+    return subjectKeys[subject] ? (language === 'ru' ? subjectKeys[subject][0] : subjectKeys[subject][1]) : subject;
   };
 
   // Get videos for current subject
@@ -266,12 +258,12 @@ const TopicDetails = () => {
   
   // Get resources for current subject
   const getResources = () => {
-    return additionalResources[subject]?.[currentLanguage === 'ru' ? 'ru' : 'kz'] || additionalResources.mathematics[currentLanguage === 'ru' ? 'ru' : 'kz'];
+    return additionalResources[subject]?.[language === 'ru' ? 'ru' : 'kz'] || additionalResources.mathematics[language === 'ru' ? 'ru' : 'kz'];
   };
 
   // Get formulas if applicable
   const getFormulas = () => {
-    return keyFormulas[subject]?.[currentLanguage === 'ru' ? 'ru' : 'kz'];
+    return keyFormulas[subject]?.[language === 'ru' ? 'ru' : 'kz'];
   };
 
   return (
@@ -526,7 +518,7 @@ const TopicDetails = () => {
                 </CardHeader>
                 <CardContent className="p-4">
                   <ul className="space-y-2">
-                    {onlinePlatforms[currentLanguage === 'ru' ? 'ru' : 'kz'].map((platform, index) => (
+                    {onlinePlatforms[language === 'ru' ? 'ru' : 'kz'].map((platform, index) => (
                       <li key={index}>
                         <a 
                           href={platform.url} 
@@ -600,7 +592,7 @@ const TopicDetails = () => {
                 </CardHeader>
                 <CardContent className="p-4">
                   <ul className="space-y-2">
-                    {educationalApps[currentLanguage === 'ru' ? 'ru' : 'kz'].map((app, index) => (
+                    {educationalApps[language === 'ru' ? 'ru' : 'kz'].map((app, index) => (
                       <li key={index} className="flex items-center p-2 bg-gray-50 rounded">
                         <span className="text-purple-500 mr-2">📱</span>
                         {app}
