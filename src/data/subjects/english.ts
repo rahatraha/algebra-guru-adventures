@@ -1,6 +1,5 @@
 
 import { SubjectData } from './types';
-import { YoutubeVideo } from '../../components/topic/YoutubeVideo';
 
 export const englishData: SubjectData = {
   "5": {

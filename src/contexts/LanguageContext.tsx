@@ -14,6 +14,10 @@ const translations = {
     'home': 'Главная',
     'mathematics': 'Математика',
     'russian': 'Русский язык',
+    'english': 'Английский язык',
+    'history': 'История',
+    'geography': 'География',
+    'kazakh': 'Казахский язык',
     'calculator': 'Калькулятор',
     'achievements': 'Достижения',
     'forum': 'Форум',
@@ -42,12 +46,22 @@ const translations = {
     'exercise': 'Упражнение',
     'solution': 'Решение',
     'show_answer': 'Показать ответ',
-    'hide_answer': 'Скрыть ответ'
+    'hide_answer': 'Скрыть ответ',
+    'video_lessons': 'Видеоуроки',
+    'additional_materials': 'Дополнительные материалы',
+    'watch_video': 'Смотреть видео',
+    'practice_exercises': 'Практические упражнения',
+    'test_knowledge': 'Проверить знания',
+    'learn_more': 'Узнать больше'
   },
   kz: {
     'home': 'Басты бет',
     'mathematics': 'Математика',
     'russian': 'Орыс тілі',
+    'english': 'Ағылшын тілі',
+    'history': 'Тарих',
+    'geography': 'География',
+    'kazakh': 'Қазақ тілі',
     'calculator': 'Калькулятор',
     'achievements': 'Жетістіктер',
     'forum': 'Форум',
@@ -76,7 +90,13 @@ const translations = {
     'exercise': 'Жаттығу',
     'solution': 'Шешім',
     'show_answer': 'Жауабын көрсету',
-    'hide_answer': 'Жауабын жасыру'
+    'hide_answer': 'Жауабын жасыру',
+    'video_lessons': 'Видеосабақтар',
+    'additional_materials': 'Қосымша материалдар',
+    'watch_video': 'Видео көру',
+    'practice_exercises': 'Практикалық жаттығулар',
+    'test_knowledge': 'Білімді тексеру',
+    'learn_more': 'Көбірек білу'
   }
 };
 
