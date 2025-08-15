@@ -88,20 +88,16 @@ export const englishData: SubjectData = {
           <li>В вопросах и отрицаниях не добавляется окончание -s/es к основному глаголу.</li>
           <li>Обратите внимание на особые случаи правописания: try → tries, cry → cries, но play → plays (потому что перед y стоит гласная).</li>
         </ul>
-        
-        <h3>Ссылки на видеоуроки:</h3>
-        <div class="video-container">
-          <iframe 
-            width="560" 
-            height="315" 
-            src="https://www.youtube.com/embed/t9ZqZSj3g_o" 
-            title="Present Simple - объяснение на русском" 
-            frameborder="0" 
-            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
-            allowfullscreen
-          ></iframe>
-        </div>
-      `
+      `,
+      videoLinks: [
+        "https://www.youtube.com/watch?v=t9ZqZSj3g_o",
+        "https://www.youtube.com/watch?v=present_simple_explained"
+      ],
+      notes: [
+        "Present Simple используется для выражения постоянных фактов и привычек",
+        "Не забывайте добавлять -s/-es в 3-м лице единственного числа",
+        "В вопросах и отрицаниях используйте do/does"
+      ]
     },
     1: {
       theory: `
@@ -209,20 +205,16 @@ export const englishData: SubjectData = {
             <td>Выражение раздражения (с always, constantly)</td>
           </tr>
         </table>
-        
-        <h3>Ссылки на видеоуроки:</h3>
-        <div class="video-container">
-          <iframe 
-            width="560" 
-            height="315" 
-            src="https://www.youtube.com/embed/ZyJAcZnj9QQ" 
-            title="Present Continuous - объяснение на русском" 
-            frameborder="0" 
-            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
-            allowfullscreen
-          ></iframe>
-        </div>
-      `
+      `,
+      videoLinks: [
+        "https://www.youtube.com/watch?v=ZyJAcZnj9QQ",
+        "https://www.youtube.com/watch?v=present_continuous_lesson"
+      ],
+      notes: [
+        "Present Continuous образуется с помощью be + V-ing",
+        "Глаголы состояния обычно не используются в Continuous",
+        "Обратите внимание на правила добавления -ing"
+      ]
     },
     2: {
       theory: `
