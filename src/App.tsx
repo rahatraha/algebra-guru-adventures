@@ -9,6 +9,8 @@ import Achievements from './pages/Achievements';
 import Calculator from './pages/Calculator';
 import DailyChallenge from './pages/DailyChallenge';
 import Profile from './pages/Profile';
+import Flashcards from './pages/Flashcards';
+import InteractiveLessons from './pages/InteractiveLessons';
 import NotFound from './pages/NotFound';
 
 import './App.css';
@@ -25,6 +27,8 @@ function App() {
           <Route path="/calculator" element={<Calculator />} />
           <Route path="/daily-challenge" element={<DailyChallenge />} />
           <Route path="/profile" element={<Profile />} />
+          <Route path="/flashcards" element={<Flashcards />} />
+          <Route path="/interactive-lessons" element={<InteractiveLessons />} />
           <Route path="*" element={<NotFound />} />
         </Routes>
       </Router>
