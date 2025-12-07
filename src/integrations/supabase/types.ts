@@ -14,7 +14,179 @@ export type Database = {
   }
   public: {
     Tables: {
-      [_ in never]: never
+      flashcard_decks: {
+        Row: {
+          created_at: string
+          grade: number | null
+          id: string
+          language: string | null
+          name: string
+          subject: string
+          topic_id: string | null
+          updated_at: string
+        }
+        Insert: {
+          created_at?: string
+          grade?: number | null
+          id?: string
+          language?: string | null
+          name: string
+          subject: string
+          topic_id?: string | null
+          updated_at?: string
+        }
+        Update: {
+          created_at?: string
+          grade?: number | null
+          id?: string
+          language?: string | null
+          name?: string
+          subject?: string
+          topic_id?: string | null
+          updated_at?: string
+        }
+        Relationships: []
+      }
+      flashcards: {
+        Row: {
+          back: string
+          created_at: string
+          deck_id: string | null
+          difficulty: number | null
+          ease_factor: number | null
+          front: string
+          id: string
+          interval: number | null
+          last_reviewed: string | null
+          next_review: string | null
+          repetitions: number | null
+        }
+        Insert: {
+          back: string
+          created_at?: string
+          deck_id?: string | null
+          difficulty?: number | null
+          ease_factor?: number | null
+          front: string
+          id?: string
+          interval?: number | null
+          last_reviewed?: string | null
+          next_review?: string | null
+          repetitions?: number | null
+        }
+        Update: {
+          back?: string
+          created_at?: string
+          deck_id?: string | null
+          difficulty?: number | null
+          ease_factor?: number | null
+          front?: string
+          id?: string
+          interval?: number | null
+          last_reviewed?: string | null
+          next_review?: string | null
+          repetitions?: number | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "flashcards_deck_id_fkey"
+            columns: ["deck_id"]
+            isOneToOne: false
+            referencedRelation: "flashcard_decks"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      generated_content: {
+        Row: {
+          created_at: string
+          examples: Json | null
+          exercises: Json | null
+          grade: number
+          id: string
+          language: string | null
+          notes: Json | null
+          subject: string
+          theory: string | null
+          topic_id: string
+          topic_name: string
+          updated_at: string
+          video_links: Json | null
+        }
+        Insert: {
+          created_at?: string
+          examples?: Json | null
+          exercises?: Json | null
+          grade: number
+          id?: string
+          language?: string | null
+          notes?: Json | null
+          subject: string
+          theory?: string | null
+          topic_id: string
+          topic_name: string
+          updated_at?: string
+          video_links?: Json | null
+        }
+        Update: {
+          created_at?: string
+          examples?: Json | null
+          exercises?: Json | null
+          grade?: number
+          id?: string
+          language?: string | null
+          notes?: Json | null
+          subject?: string
+          theory?: string | null
+          topic_id?: string
+          topic_name?: string
+          updated_at?: string
+          video_links?: Json | null
+        }
+        Relationships: []
+      }
+      interactive_lessons: {
+        Row: {
+          content: Json
+          created_at: string
+          difficulty: number | null
+          estimated_time: number | null
+          grade: number
+          id: string
+          language: string | null
+          subject: string
+          title: string
+          topic_id: string | null
+          type: string
+        }
+        Insert: {
+          content: Json
+          created_at?: string
+          difficulty?: number | null
+          estimated_time?: number | null
+          grade: number
+          id?: string
+          language?: string | null
+          subject: string
+          title: string
+          topic_id?: string | null
+          type?: string
+        }
+        Update: {
+          content?: Json
+          created_at?: string
+          difficulty?: number | null
+          estimated_time?: number | null
+          grade?: number
+          id?: string
+          language?: string | null
+          subject?: string
+          title?: string
+          topic_id?: string | null
+          type?: string
+        }
+        Relationships: []
+      }
     }
     Views: {
       [_ in never]: never
