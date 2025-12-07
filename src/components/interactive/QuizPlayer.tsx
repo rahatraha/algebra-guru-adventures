@@ -24,7 +24,9 @@ export const QuizPlayer: React.FC<QuizPlayerProps> = ({
   const [startTime] = useState(Date.now());
   const [isCompleted, setIsCompleted] = useState(false);
 
-  const questions = lesson.type === 'quiz' ? lesson.content.questions : [];
+  const questions = lesson.type === 'quiz' && 'questions' in lesson.content 
+    ? (lesson.content as { questions: Array<{ id: string; question: string; options: string[]; correctAnswer: number; explanation?: string; imageUrl?: string }> }).questions 
+    : [];
   const currentQuestion = questions[currentQuestionIndex];
   const progress = ((currentQuestionIndex + 1) / questions.length) * 100;
 
@@ -206,10 +208,10 @@ export const QuizPlayer: React.FC<QuizPlayerProps> = ({
             {currentQuestion.question}
           </p>
 
-          {currentQuestion.image && (
+          {currentQuestion.imageUrl && (
             <div className="flex justify-center">
               <img
-                src={currentQuestion.image}
+                src={currentQuestion.imageUrl}
                 alt="Изображение к вопросу"
                 className="max-w-full h-auto rounded-lg shadow-md"
               />
