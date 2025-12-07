@@ -11,6 +11,7 @@ import DailyChallenge from './pages/DailyChallenge';
 import Profile from './pages/Profile';
 import Flashcards from './pages/Flashcards';
 import InteractiveLessons from './pages/InteractiveLessons';
+import ContentAdmin from './pages/ContentAdmin';
 import NotFound from './pages/NotFound';
 
 import './App.css';
@@ -29,6 +30,7 @@ function App() {
           <Route path="/profile" element={<Profile />} />
           <Route path="/flashcards" element={<Flashcards />} />
           <Route path="/interactive-lessons" element={<InteractiveLessons />} />
+          <Route path="/admin/content" element={<ContentAdmin />} />
           <Route path="*" element={<NotFound />} />
         </Routes>
       </Router>
